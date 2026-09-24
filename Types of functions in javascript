@@ -1,0 +1,33 @@
+// PURE FUNCTION
+function function_name (){
+    return ;
+}
+
+// ANONYMOUS FUNCTION
+var add=(function(a,b){
+    c=a+b;
+    return c;
+
+})(5,10)
+
+// ARROW FUNCTION
+const add = (a, b) => a + b;
+
+const square = n => n * n;
+
+const greet = name => {
+    const message = `Hello, ${name}!`;
+    return message;
+};
+
+// CALLBACK FUNCTION
+function fetchData(callback) {
+    setTimeout(() => {
+        const data = "Data fetched successfully!";
+        callback(data);
+    }, 2000);
+}
+
+fetchData(function(result) {
+    console.log(result);  
+});
