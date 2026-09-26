@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ultimate Tic Tac Toe</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(-45deg,#ff416c,#ff4b2b,#4776E6,#8E54E9);
+    background-size:400% 400%;
+    animation:bg 12s ease infinite;
+}
+
+@keyframes bg{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+.container{
+    background:rgba(255,255,255,.15);
+    backdrop-filter:blur(15px);
+    padding:30px;
+    border-radius:25px;
+    text-align:center;
+    color:white;
+    box-shadow:0 10px 30px rgba(0,0,0,.3);
+}
+
+h1{
+    margin-bottom:15px;
+}
+
+.scoreboard{
+    display:flex;
+    justify-content:space-around;
+    margin:15px 0;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.status{
+    margin-bottom:20px;
+    font-size:20px;
+}
+
+.board{
+    display:grid;
+    grid-template-columns:repeat(3,110px);
+    gap:10px;
+}
+
+.cell{
+    width:110px;
+    height:110px;
+    background:rgba(255,255,255,.2);
+    border-radius:15px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:50px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.cell:hover{
+    transform:scale(1.05);
+    background:rgba(255,255,255,.3);
+}
+
+.win{
+    background:#00ff88 !important;
+    color:#000;
+}
+
+.buttons{
+    margin-top:20px;
+}
+
+button{
+    border:none;
+    padding:12px 20px;
+    border-radius:10px;
+    cursor:pointer;
+    margin:5px;
+    font-weight:bold;
+}
+
+.restart{
+    background:#ff9800;
+}
+
+.reset{
+    background:#00c853;
+    color:white;
+}
+
+@media(max-width:450px){
+    .board{
+        grid-template-columns:repeat(3,90px);
+    }
+
+    .cell{
+        width:90px;
+        height:90px;
+        font-size:40px;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<h1>🎮 Ultimate Tic Tac Toe</h1>
+
+<div class="scoreboard">
+<div>👤 You: <span id="playerScore">0</span></div>
+<div>🤖 AI: <span id="aiScore">0</span></div>
+</div>
+
+<div class="status" id="status">
+Your Turn (X)
+</div>
+
+<div class="board" id="board">
+<div class="cell" data-index="0"></div>
+<div class="cell" data-index="1"></div>
+<div class="cell" data-index="2"></div>
+<div class="cell" data-index="3"></div>
+<div class="cell" data-index="4"></div>
+<div class="cell" data-index="5"></div>
+<div class="cell" data-index="6"></div>
+<div class="cell" data-index="7"></div>
+<div class="cell" data-index="8"></div>
+</div>
+
+<div class="buttons">
+<button class="restart" onclick="restartGame()">Restart Round</button>
+<button class="reset" onclick="resetScores()">New Match</button>
+</div>
+</div>
+
+<script>
+let board=["","","","","","","","",""];
+let gameActive=true;
+
+let playerScore=0;
+let aiScore=0;
+
+const statusText=document.getElementById("status");
+const cells=document.querySelectorAll(".cell");
+
+const wins=[
+[0,1,2],
+[3,4,5],
+[6,7,8],
+[0,3,6],
+[1,4,7],
+[2,5,8],
+[0,4,8],
+[2,4,6]
+];
+
+cells.forEach(cell=>{
+cell.addEventListener("click",playerMove);
+});
+
+function playerMove(e){
+
+let index=e.target.dataset.index;
+
+if(board[index]!==""||!gameActive) return;
+
+board[index]="X";
+e.target.textContent="X";
+
+playBeep();
+
+if(checkWinner("X")) return;
+
+statusText.textContent="AI Thinking...";
+
+setTimeout(()=>{
+aiMove();
+},500);
+}
+
+function aiMove(){
+
+let bestMove=minimax(board,"O").index;
+
+board[bestMove]="O";
+cells[bestMove].textContent="O";
+
+playBeep();
+
+if(checkWinner("O")) return;
+
+statusText.textContent="Your Turn (X)";
+}
+
+function minimax(newBoard,player){
+
+let available=[];
+
+for(let i=0;i<9;i++){
+if(newBoard[i]=="") available.push(i);
+}
+
+if(winner(newBoard,"X")) return {score:-10};
+if(winner(newBoard,"O")) return {score:10};
+if(available.length===0) return {score:0};
+
+let moves=[];
+
+for(let i=0;i<available.length;i++){
+
+let move={};
+move.index=available[i];
+
+newBoard[available[i]]=player;
+
+if(player==="O"){
+move.score=minimax(newBoard,"X").score;
+}else{
+move.score=minimax(newBoard,"O").score;
+}
+
+newBoard[available[i]]="";
+
+moves.push(move);
+}
+
+let bestMove;
+
+if(player==="O"){
+let bestScore=-10000;
+for(let i=0;i<moves.length;i++){
+if(moves[i].score>bestScore){
+bestScore=moves[i].score;
+bestMove=i;
+}
+}
+}else{
+let bestScore=10000;
+for(let i=0;i<moves.length;i++){
+if(moves[i].score<bestScore){
+bestScore=moves[i].score;
+bestMove=i;
+}
+}
+}
+
+return moves[bestMove];
+}
+
+function winner(b,p){
+return wins.some(c =>
+b[c[0]]===p &&
+b[c[1]]===p &&
+b[c[2]]===p
+);
+}
+
+function checkWinner(player){
+
+for(let combo of wins){
+
+const[a,b,c]=combo;
+
+if(
+board[a]===player &&
+board[b]===player &&
+board[c]===player
+){
+
+cells[a].classList.add("win");
+cells[b].classList.add("win");
+cells[c].classList.add("win");
+
+gameActive=false;
+
+if(player==="X"){
+playerScore++;
+document.getElementById("playerScore").textContent=playerScore;
+statusText.textContent="🎉 You Win!";
+}else{
+aiScore++;
+document.getElementById("aiScore").textContent=aiScore;
+statusText.textContent="🤖 AI Wins!";
+}
+
+return true;
+}
+}
+
+if(!board.includes("")){
+statusText.textContent="🤝 Draw!";
+gameActive=false;
+return true;
+}
+
+return false;
+}
+
+function restartGame(){
+
+board=["","","","","","","","",""];
+gameActive=true;
+
+cells.forEach(cell=>{
+cell.textContent="";
+cell.classList.remove("win");
+});
+
+statusText.textContent="Your Turn (X)";
+}
+
+function resetScores(){
+playerScore=0;
+aiScore=0;
+
+document.getElementById("playerScore").textContent=0;
+document.getElementById("aiScore").textContent=0;
+
+restartGame();
+}
+
+function playBeep(){
+let audio=new(window.AudioContext||window.webkitAudioContext)();
+let osc=audio.createOscillator();
+let gain=audio.createGain();
+
+osc.connect(gain);
+gain.connect(audio.destination);
+
+osc.frequency.value=500;
+osc.start();
+
+gain.gain.exponentialRampToValueAtTime(
+0.00001,
+audio.currentTime+0.15
+);
+
+osc.stop(audio.currentTime+0.15);
+}
+</script>
+
+</body>
+</html>
