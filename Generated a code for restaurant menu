@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rainbow Flavors Restaurant</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
+}
+
+body{
+background:linear-gradient(135deg,#ffecd2,#fcb69f,#ff9a9e,#fad0c4);
+}
+
+header{
+background:linear-gradient(90deg,#ff512f,#dd2476);
+padding:15px;
+position:sticky;
+top:0;
+z-index:1000;
+box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+max-width:1200px;
+margin:auto;
+}
+
+.logo{
+font-size:30px;
+font-weight:bold;
+color:white;
+}
+
+.nav-links{
+display:flex;
+gap:20px;
+}
+
+.nav-links a{
+text-decoration:none;
+color:white;
+font-weight:bold;
+transition:0.3s;
+}
+
+.nav-links a:hover{
+color:yellow;
+}
+
+.hero{
+height:70vh;
+background:url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1600') center/cover;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+}
+
+.hero h1{
+font-size:60px;
+background:rgba(0,0,0,0.5);
+padding:20px;
+border-radius:20px;
+}
+
+.section{
+padding:50px 20px;
+}
+
+.section h2{
+text-align:center;
+font-size:40px;
+margin-bottom:30px;
+color:#d62828;
+}
+
+.menu-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:25px;
+max-width:1200px;
+margin:auto;
+}
+
+.card{
+background:white;
+border-radius:20px;
+overflow:hidden;
+box-shadow:0 8px 15px rgba(0,0,0,0.15);
+transition:0.4s;
+}
+
+.card:hover{
+transform:translateY(-10px) scale(1.03);
+}
+
+.card img{
+width:100%;
+height:220px;
+object-fit:cover;
+}
+
+.card-content{
+padding:20px;
+}
+
+.card-content h3{
+color:#ff5722;
+margin-bottom:10px;
+}
+
+.price{
+font-size:20px;
+font-weight:bold;
+color:green;
+margin-top:10px;
+}
+
+footer{
+background:#222;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:40px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="navbar">
+<div class="logo">🍽 Rainbow Flavors</div>
+
+<div class="nav-links">
+<a href="#north">North Indian</a>
+<a href="#south">South Indian</a>
+<a href="#west">West Indian</a>
+<a href="#central">Central India</a>
+<a href="#world">World Cuisine</a>
+<a href="#dessert">Desserts</a>
+<a href="#drinks">Drinks</a>
+</div>
+</div>
+</header>
+
+<section class="hero">
+<h1>🌈 Welcome to Rainbow Flavors Restaurant 🌈</h1>
+</section>
+
+<!-- NORTH INDIAN -->
+<section class="section" id="north">
+<h2>🥘 North Indian Cuisine</h2>
+
+<div class="menu-grid">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=800">
+<div class="card-content">
+<h3>Butter Chicken</h3>
+<p>Creamy rich chicken curry.</p>
+<div class="price">₹320</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?w=800">
+<div class="card-content">
+<h3>Paneer Tikka</h3>
+<p>Grilled cottage cheese cubes.</p>
+<div class="price">₹250</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- SOUTH INDIAN -->
+<section class="section" id="south">
+<h2>🍛 South Indian Cuisine</h2>
+
+<div class="menu-grid">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=800">
+<div class="card-content">
+<h3>Masala Dosa</h3>
+<p>Crispy dosa with potato filling.</p>
+<div class="price">₹120</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1630383249896-424e482df921?w=800">
+<div class="card-content">
+<h3>Idli Sambar</h3>
+<p>Soft idlis served with sambar.</p>
+<div class="price">₹90</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- WEST INDIAN -->
+<section class="section" id="west">
+<h2>🌶 West Indian Cuisine</h2>
+
+<div class="menu-grid">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1613292443284-8d10ef9383fe?w=800">
+<div class="card-content">
+<h3>Pav Bhaji</h3>
+<p>Mumbai's famous street food.</p>
+<div class="price">₹140</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800">
+<div class="card-content">
+<h3>Dhokla</h3>
+<p>Gujarati steamed savory cake.</p>
+<div class="price">₹110</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- CENTRAL INDIA -->
+<section class="section" id="central">
+<h2>🍲 Central India Cuisine</h2>
+
+<div class="menu-grid">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800">
+<div class="card-content">
+<h3>Poha</h3>
+<p>Traditional Madhya Pradesh breakfast.</p>
+<div class="price">₹80</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800">
+<div class="card-content">
+<h3>Dal Bafla</h3>
+<p>Authentic MP special dish.</p>
+<div class="price">₹180</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- WORLD CUISINE -->
+<section class="section" id="world">
+<h2>🌍 International Cuisine</h2>
+
+<div class="menu-grid">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800">
+<div class="card-content">
+<h3>Italian Pizza</h3>
+<p>Cheesy wood-fired pizza.</p>
+<div class="price">₹350</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=800">
+<div class="card-content">
+<h3>Chinese Noodles</h3>
+<p>Authentic stir-fried noodles.</p>
+<div class="price">₹240</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1613514785940-daed07799d9b?w=800">
+<div class="card-content">
+<h3>Mexican Tacos</h3>
+<p>Crunchy tacos with fillings.</p>
+<div class="price">₹280</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1579871494447-9811cf80d66c?w=800">
+<div class="card-content">
+<h3>Japanese Sushi</h3>
+<p>Fresh handcrafted sushi.</p>
+<div class="price">₹450</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- DESSERTS -->
+<section class="section" id="dessert">
+<h2>🍨 Desserts</h2>
+
+<div class="menu-grid">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800">
+<div class="card-content">
+<h3>Chocolate Cake</h3>
+<div class="price">₹180</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=800">
+<div class="card-content">
+<h3>Ice Cream Sundae</h3>
+<div class="price">₹150</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- DRINKS -->
+<section class="section" id="drinks">
+<h2>🥤 Refreshing Drinks</h2>
+
+<div class="menu-grid">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1546173159-315724a31696?w=800">
+<div class="card-content">
+<h3>Mango Shake</h3>
+<div class="price">₹120</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=800">
+<div class="card-content">
+<h3>Fresh Lime Soda</h3>
+<div class="price">₹90</div>
+</div>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=800">
+<div class="card-content">
+<h3>Cold Coffee</h3>
+<div class="price">₹140</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<footer>
+<h3>🍽 Rainbow Flavors Restaurant</h3>
+<p>Serving Happiness From Around The World 🌎</p>
+</footer>
+
+</body>
+</html>
