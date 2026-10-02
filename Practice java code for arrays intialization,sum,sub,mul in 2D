@@ -1,0 +1,82 @@
+public class TwoDArrayOperations {
+
+    public static void main(String[] args) {
+        // 1. Initialization of two 2x2 matrices
+        int[][] matrixA = {
+            {8, 6},
+            {4, 2}
+        };
+
+        int[][] matrixB = {
+            {4, 2},
+            {2, 1}
+        };
+
+        int rows = matrixA.length;
+        int cols = matrixA[0].length;
+
+        // Arrays to store results
+        int[][] sum = new int[rows][cols];
+        int[][] sub = new int[rows][cols];
+        int[][] mul = new int[rows][cols];
+        double[][] div = new double[rows][cols]; // double to handle floating-point division
+
+        // 2. Addition, Subtraction, and Element-wise Division
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                sum[i][j] = matrixA[i][j] + matrixB[i][j];
+                sub[i][j] = matrixA[i][j] - matrixB[i][j];
+                div[i][j] = (double) matrixA[i][j] / matrixB[i][j];
+            }
+        }
+
+        // 3. Matrix Multiplication (Standard Matrix Product)
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                mul[i][j] = 0;
+                for (int k = 0; k < cols; k++) {
+                    mul[i][j] += matrixA[i][k] * matrixB[k][j];
+                }
+            }
+        }
+
+        // 4. Output Results
+        System.out.println("--- Matrix A ---");
+        printIntMatrix(matrixA);
+
+        System.out.println("\n--- Matrix B ---");
+        printIntMatrix(matrixB);
+
+        System.out.println("\n--- Addition (A + B) ---");
+        printIntMatrix(sum);
+
+        System.out.println("\n--- Subtraction (A - B) ---");
+        printIntMatrix(sub);
+
+        System.out.println("\n--- Multiplication (Matrix Product A * B) ---");
+        printIntMatrix(mul);
+
+        System.out.println("\n--- Division (Element-wise A / B) ---");
+        printDoubleMatrix(div);
+    }
+
+    // Helper method to display integer 2D arrays
+    public static void printIntMatrix(int[][] matrix) {
+        for (int[] row : matrix) {
+            for (int val : row) {
+                System.out.print(val + "\t");
+            }
+            System.out.println();
+        }
+    }
+
+    // Helper method to display double 2D arrays
+    public static void printDoubleMatrix(double[][] matrix) {
+        for (double[] row : matrix) {
+            for (double val : row) {
+                System.out.printf("%.2f\t", val);
+            }
+            System.out.println();
+        }
+    }
+}
